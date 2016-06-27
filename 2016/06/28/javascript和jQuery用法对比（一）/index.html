@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascript和jQuery用法对比（一） | =cat=</title>
+  <meta name="author" content="=Cat=">
+  
+  <meta name="description" content="期待摸到前端大门的小虫">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="javascript和jQuery用法对比（一）"/>
+  <meta property="og:site_name" content="=cat="/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="=cat=" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">=cat=</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="//archives">归档</a></li>
+    
+      <li><a href="//about">关于</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-06-27T16:55:58.000Z"><a href="/2016/06/28/javascript和jQuery用法对比（一）/">2016-06-28</a></time>
+      
+      
+  
+    <h1 class="title">javascript和jQuery用法对比（一）</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>虽然认真的接触前端有一个多月了，对于javascript和jquery都略知一二，但是现在真的挺容易搞混里面的一些方法属性。所以我觉得对比双方的用法来达到区分这两者一些方法属性的作用对于刚接触前端不久的我来说是很有用处的。<br>综合自己的认知和一些大牛的博客以及书本里的一些知识，我将慢慢来完成这一部分的内容，我想应该是会有趣而且有收获的。由于我的知识储备不多，我的内容也会比较混乱。<br>不过到最后的话我会好好整理的。<br><a id="more"></a></p>
+<h3 id="用javascript和jquery判断元素是否存在，如不存在则创建，并加入子元素"><a href="#用javascript和jquery判断元素是否存在，如不存在则创建，并加入子元素" class="headerlink" title="用javascript和jquery判断元素是否存在，如不存在则创建，并加入子元素"></a>用javascript和jquery判断元素是否存在，如不存在则创建，并加入子元素</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">__javascript实现代码__</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">debug</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> log = <span class="built_in">document</span>.getElementById(<span class="string">'debuglog'</span>);</span><br><span class="line">	<span class="keyword">if</span>(!log)&#123;</span><br><span class="line">		log = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line">		log.id = <span class="string">'debuglog'</span>;</span><br><span class="line">		log.innerHTML=<span class="string">"&lt;h&gt;debug&lt;/h&gt;"</span>;</span><br><span class="line">		<span class="built_in">document</span>.body.appendChild(log);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> pre = <span class="built_in">document</span>.createElement(<span class="string">'pre'</span>);</span><br><span class="line">	<span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(msg);</span><br><span class="line">	pre.appendChild(text);</span><br><span class="line">	log.appendChild(pre);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">__jquery实现代码__</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">debug</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> log = $(<span class="string">'#debuglog'</span>);</span><br><span class="line">		<span class="keyword">if</span>(log.length==<span class="number">0</span>)&#123;</span><br><span class="line">		log = $(<span class="string">'&lt;div id="debuglog"&gt;&lt;h&gt;debug&lt;/h&gt;&lt;/div&gt;'</span>);</span><br><span class="line">		log.appengTo(<span class="built_in">document</span>.body);</span><br><span class="line">		&#125;</span><br><span class="line">		log.append($(<span class="string">'&lt;pre/&gt;'</span>)).text(msg);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>其实这样对比并不是要凸显jquery的方便好用，而是想告诫自己不要忽略原生的JS的代码。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+    
+    
+    <a href="/2016/06/27/markdown-语法/" class="alignright next" >Next</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- 多说评论框 start -->
+ <div class="ds-thread" data-thread-key="/2016/06/28/javascript和jQuery用法对比（一）/" data-title="javascript和jQuery用法对比（一）" data-url="http://yoursite.com/2016/06/28/javascript和jQuery用法对比（一）/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"jr-liao"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+
+<section id="comment">
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 =Cat=
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
